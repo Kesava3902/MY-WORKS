@@ -29,10 +29,10 @@ def Mark_board(player,r,c):
     if player == 2:
         Board[r][c]=2
 def Owins():
-    screen.fill(screen_color1)
+    screen.fill(screen_color)
     screen.blit(text1, textRect)
 def Xwins():
-    screen.fill(screen_color1)
+    screen.fill(screen_color)
     screen.blit(text2, textRect)
      
 
@@ -84,6 +84,7 @@ def draw_circle(r,c):
 def draw_cross():
     pygame.draw.line(screen,cross_color,(c*200+20,r*200+20),(c*200+180,r*200+180),15)
     pygame.draw.line(screen,cross_color,(c*200+20,r*200+180),(c*200+180,r*200+20),15)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -100,6 +101,7 @@ while True:
                     pygame.display.update()
                     if check_winner():
                         game_over=True
+                        break
                     player = 2
                 elif player == 2:
                     Mark_board(2,r,c)
@@ -108,7 +110,9 @@ while True:
                     draw_cross()
                     if check_winner():
                         game_over=True
+                        break
                     player = 1   
+    else:
         if 0 not in Board and not game_over:
              pygame.display.update()
              screen.fill(screen_color1)
@@ -116,10 +120,12 @@ while True:
         if game_over:
             if player==1:
                  pygame.display.update()
-                 Xwins()
+                 Owins()
+                 
             if player==2:
                  pygame.display.update()
-                 Owins()         
+                 Xwins()  
+        
     pygame.display.update()
     pygame.time.delay(30)
 
